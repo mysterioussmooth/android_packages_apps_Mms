@@ -153,6 +153,7 @@ import com.android.mms.templates.TemplatesProvider.Template;
 import com.android.mms.transaction.MessagingNotification;
 import com.android.mms.ui.MessageListView.OnSizeChangedListener;
 import com.android.mms.ui.MessageUtils.ResizeImageResultCallback;
+import com.android.mms.ui.MessagingPreferenceActivity;
 import com.android.mms.ui.RecipientsEditor.RecipientContextMenuInfo;
 import com.android.mms.util.DateUtils;
 import com.android.mms.util.DraftCache;
@@ -3670,6 +3671,7 @@ public class ComposeMessageActivity extends Activity
                 .getDefaultSharedPreferences((Context) ComposeMessageActivity.this);
 
         // TextView.setTextKeepState() doesn't like null input.
+        boolean enableEmojis = prefs.getBoolean(MessagingPreferenceActivity.ENABLE_EMOJIS, false);
         if (text != null) {
             // Restore the emojis if necessary
             if (enableEmojis) {
@@ -3682,6 +3684,7 @@ public class ComposeMessageActivity extends Activity
         } else {
             mTextEditor.setText("");
         }
+
         boolean enableQuickEmojis = prefs.getBoolean(MessagingPreferenceActivity.ENABLE_QUICK_EMOJIS, false);
         if (enableQuickEmojis && enableEmojis) {
             ImageButton quickEmojis = (ImageButton) mBottomPanel.findViewById(R.id.quick_emoji_button_mms);
